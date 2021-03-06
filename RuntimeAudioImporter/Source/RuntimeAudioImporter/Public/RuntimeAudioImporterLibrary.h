@@ -180,7 +180,7 @@ class UPreimportedSoundAsset;
  *
  * @param Percentage Percentage of importing completed (0-100%)
  */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnProgress, const int32, Percentage);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAudioProgress, const int32, Percentage);
 
 /**
  * Declare a delegate that will be called on the transcoding result
@@ -189,7 +189,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnProgress, const int32, Percentage
  * @param ReadySoundWave Ready SoundWave object reference
  * @param Status TranscodingStatus Enum in case an error occurs
  */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnResult, class URuntimeAudioImporterLibrary*,
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnAudioResult, class URuntimeAudioImporterLibrary*,
                                                RuntimeAudioImporterObjectRef,
                                                const USoundWave*, SoundWaveRef,
                                                const TEnumAsByte < ETranscodingStatus >&, Status);
@@ -206,11 +206,11 @@ public:
 
 	/** Bind to know when the transcoding is on progress */
 	UPROPERTY(BlueprintAssignable, Category = "RuntimeAudioImporter")
-	FOnProgress OnProgress;
+	FOnAudioProgress OnProgress;
 
 	/** Bind to know when the transcoding is complete (even if it fails) */
 	UPROPERTY(BlueprintAssignable, Category = "RuntimeAudioImporter")
-	FOnResult OnResult;
+	FOnAudioResult OnResult;
 
 	/** Transcoding fill info. CPP use only */
 	FTranscodingFillStruct TranscodingFillInfo = FTranscodingFillStruct();
